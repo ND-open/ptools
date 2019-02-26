@@ -3,7 +3,7 @@ Title: Data Fabric tools
 Version: 0.0.0.9000
 Authors@R: person("Camille", "Bonamy", email = "camille.bonamy@nextdecision.fr", role = c("aut", "cre"))
 Description: Collection of function to handle simple task around data fabric project.
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.0.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

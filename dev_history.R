@@ -10,3 +10,9 @@ usethis::use_build_ignore("dev_history.R")
 
 
 # usethis::edit_git_ignore()
+
+
+# TEST AFTER PUSH ON GITHUB REPOS
+# remove.packages("dftools")
+
+# devtools::install_github("goodfr/dftools")

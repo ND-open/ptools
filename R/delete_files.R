@@ -30,3 +30,5 @@ delete_files <- function(hdfsUri, dirUri, user_name){
                 }
         }
 }
+
+# library("dftools")
