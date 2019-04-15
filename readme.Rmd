@@ -4,7 +4,25 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r echo=FALSE, prompt=FALSE, results='asis', comment=""}
+
+# install.packages("usethis", lib = "lib_local")
+# install.packages("clisymbols", lib = "lib_local")
+# library(usethis, lib.loc = "lib_local")
+# library(clisymbols, lib.loc = "lib_local")
+# usethis::use_lifecycle_badge("Experimental")
+
+# cat('
+#   [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
+# ')
+
+cat("[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)"
+)
+
 ```
 
 to come : hex logo using GuangchuangYu/hexSticker pkg

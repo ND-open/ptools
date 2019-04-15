@@ -1,17 +1,25 @@
 Package: dftools
 Title: Data Fabric tools
 Version: 0.0.0.9000
-Authors@R: person("Camille", "Bonamy", email = "camille.bonamy@nextdecision.fr", role = c("aut", "cre"))
-Description: Collection of function to handle simple task around data fabric project.
-Depends: R (>= 3.0.0)
+Authors@R: 
+    person(given = "Camille",
+           family = "Bonamy",
+           role = c("aut", "cre"),
+           email = "camille.bonamy@nextdecision.fr")
+Description: Collection of function to handle simple task around
+    data fabric project.
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
+Depends: 
+    R (>= 3.0.0)
 Imports: 
+    dplyr,
     httr,
     magrittr,
     purrr,
     tibble,
-    utils,
-    dplyr
+    utils
+Suggests: 
+    testthat
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.1.1

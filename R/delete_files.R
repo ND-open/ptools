@@ -1,34 +1,52 @@
 
+# =======================================================================================
+#       Delete one file or all file in hdfs directory
 
-#' delete_files
-#'
-#' @param hdfsUri, the Uniform Resource Identifier of the HDFS used
-#' @param dirUri, the path to the directory to delete files from
-#' @param user_name, a user name with write and delelete rights
-#'
-#' @return Nothing. Files in directory are removed.
-#' @export
-#' @import httr
-#' @importFrom dplyr pull
+# hdfsUri : hdfs url
+# dirUri : path to directory of interest
+# user_name : user name with overwrite credential
+# delete_all : default set to TRUE, to delete all files in folder
+# fname : default set to empty string, if only one file is to be delete set delete_all to FALSE and name it here
 
-delete_files <- function(hdfsUri, dirUri, user_name){
+# =======================================================================================
+
+delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""){
+
+        require("httr")
+        require("dplyr")
+
+        source("R/file_manip/list_files.R")
 
         fnames <- list_files(hdfsUri, dirUri)
 
-        if (length(fnames) == 0){stop("There is no new file to process")}
+        if (length(fnames) == 0){warning("There is no new file to process")}
         else{
                 # ===== Delete parameter
-                optionnalParametersWrite <- paste0("&overwrite=true&user.name=", user_name)
+                username <- ifelse(is.null(user_name), "", paste0("&user.name=", user_name) )
+                optionnalParametersWrite <- paste0("&overwrite=true", user_name)
+
+                if(user_name == ""){warning("user_name empty, this may cause problems.")}
+
                 deleteParameter <- "?op=DELETE"
 
-                cat("The following files will be deleted :\n", fnames, "\n")
+                cat("The following file(s) will be deleted :\n", fnames, "\n")
 
-                for (fname in fnames){
+                if(delete_all){
+                        for (fname in fnames){
+                                # Delete
+                                uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
+                                response <- DELETE(uriToDelete)
+
+                                cat("The following file has been deleted :\n", fname, "\n")
+                        }
+                }
+                else{
                         # Delete
                         uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
                         response <- DELETE(uriToDelete)
+
+                        cat("The following file has been deleted :\n", fname, "\n")
                 }
         }
 }
 
-# library("dftools")
