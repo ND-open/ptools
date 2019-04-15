@@ -1,3 +1,4 @@
+^data$
 ^README\.Rmd$
 ^README\.md$
 ^dev_history\.R$

@@ -1,21 +1,18 @@
 
-# =======================================================================================
-#       Delete one file or all file in hdfs directory
-
-# hdfsUri : hdfs url
-# dirUri : path to directory of interest
-# user_name : user name with overwrite credential
-# delete_all : default set to TRUE, to delete all files in folder
-# fname : default set to empty string, if only one file is to be delete set delete_all to FALSE and name it here
-
-# =======================================================================================
+#' delete_files
+#'
+#' @param hdfsUri , hdfs url
+#' @param dirUri , path to directory of interest
+#' @param user_name , user name with overwrite credential
+#' @param delete_all , default set to TRUE, to delete all files in folder
+#' @param fname , default set to empty string, if only one file is to be delete set delete_all to FALSE and name it here
+#'
+#' @return nada , delete one file or all files in hdfs directory
+#' @export
+#' @import httr
+#' @import dplyr
 
 delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""){
-
-        require("httr")
-        require("dplyr")
-
-        source("R/file_manip/list_files.R")
 
         fnames <- list_files(hdfsUri, dirUri)
 
@@ -37,6 +34,8 @@ delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""
                                 uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
                                 response <- DELETE(uriToDelete)
 
+                                warn_for_status(response)
+
                                 cat("The following file has been deleted :\n", fname, "\n")
                         }
                 }
@@ -44,6 +43,8 @@ delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""
                         # Delete
                         uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
                         response <- DELETE(uriToDelete)
+
+                        warn_for_status(response)
 
                         cat("The following file has been deleted :\n", fname, "\n")
                 }
