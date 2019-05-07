@@ -1,5 +1,5 @@
-Package: dftools
-Title: Data Fabric tools
+Package: ptools
+Title: Data Fabric pipeline tools
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Camille",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "camille.bonamy@nextdecision.fr")
 Description: Collection of function to handle simple task around
-    data fabric project.
+    data fabric projects.
 License: GPL-3
 Depends: 
     R (>= 3.0.0)

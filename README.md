@@ -1,6 +1,10 @@
 dftools
 ================
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<img src="man/ptools.png" width="200px" />
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 to come : hex logo using GuangchuangYu/hexSticker pkg

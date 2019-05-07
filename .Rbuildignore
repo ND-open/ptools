@@ -2,5 +2,5 @@
 ^README\.Rmd$
 ^README\.md$
 ^dev_history\.R$
-^dftools\.Rproj$
+^ptools\.Rproj$
 ^\.Rproj\.user$

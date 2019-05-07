@@ -4,7 +4,7 @@ test_that("connect_init works", {
 
         # === for test
         # if(interactive() == TRUE){
-                conn <- dftools::connect_init(id = Sys.getenv("id_v"),
+                conn <- ptools::connect_init(id = Sys.getenv("id_v"),
                                               pw = Sys.getenv("pw_v"),
                                               host = Sys.getenv("host_v"),
                                               port = Sys.getenv("port_v")

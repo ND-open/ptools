@@ -1,4 +1,4 @@
 library(testthat)
-library(dftools)
+library(ptools)
 
-test_check("dftools")
+test_check("ptools")
