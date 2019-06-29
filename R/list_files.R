@@ -6,14 +6,12 @@
 #'
 #' @return a character vector of files in directory
 #' @export
-#' @import httr
-#' @import magrittr
-#' @importFrom purrr pluck
-#' @importFrom purrr map_dfr
-#' @import tibble
-#'
-# @import dplyr
-# @import stringr
+#' @importFrom httr GET warn_for_status content
+#' @importFrom magrittr %>%
+#' @importFrom purrr pluck map_dfr
+# @importFrom purrr map_dfr
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr pull
 
 list_files <- function(hdfsUri, dirUri){
 
@@ -30,7 +28,7 @@ list_files <- function(hdfsUri, dirUri){
                 purrr::map_dfr(tibble::as_tibble)
 
         # this step generates error if dir is empty - value does not exists otherwise
-        if( match("value", names(filelist), nomatch = 0 ) == 1 | dim(filelist)[1] == 0 ){
+        if( base::match("value", names(filelist), nomatch = 0 ) == 1 | dim(filelist)[1] == 0 ){
                 if(dim(filelist)[1] == 0){
                         cat("No files in", dirUri,"tibble null. \n")
                         }

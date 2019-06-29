@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "camille.bonamy@nextdecision.fr")
 Description: Collection of function to handle simple task around
-    data fabric projects.
+    HDFS (such as SAAGIE data fabric) projects.
 License: GPL-3
 Depends: 
     R (>= 3.0.0)
@@ -16,11 +16,11 @@ Imports:
     httr,
     magrittr,
     purrr,
-    tibble,
     utils,
     data.table,
     DBI,
-    odbc
+    odbc,
+    tibble
 Suggests: 
     testthat
 Encoding: UTF-8

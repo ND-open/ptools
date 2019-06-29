@@ -8,6 +8,8 @@
 #'
 #' @return a connection to impala, the driver (depending on OS) is automatically detected.
 #' @export
+#' @importFrom DBI dbConnect
+#' @importFrom odbc odbc
 
 connect_init <- function(id, pw, host, port){
 

@@ -1,13 +1,13 @@
 context("test-connect_init")
 
-test_that("connect_init works", {
+test_that("connect_init", {
 
         # === for test
         # if(interactive() == TRUE){
-                conn <- ptools::connect_init(id = Sys.getenv("id_v"),
-                                              pw = Sys.getenv("pw_v"),
-                                              host = Sys.getenv("host_v"),
-                                              port = Sys.getenv("port_v")
+                conn <- ptools::connect_init(id = Sys.getenv("id_ptools"),
+                                              pw = Sys.getenv("pw_ptools"),
+                                              host = Sys.getenv("host_ptools"),
+                                              port = Sys.getenv("port_ptools")
                                               )
                 # str(conn)
                 # class(conn)[1]

@@ -13,15 +13,15 @@
 #'
 #' @return nada , the file is copied to wanted directory
 #' @export
-#' @import httr
-#' @import utils
+#' @importFrom httr PUT warn_for_status upload_file
+#' @importFrom utils download.file
 
 copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname="", from_hdfs=TRUE, from_folder="", newname=""){
 
         # ===== Getting file names to move
         if(from_hdfs == TRUE){
 
-                fnames <- list_files(hdfsUri, dirUri)
+                fnames <- list_files(hdfsUri, dirUri) # (ptools::list_files)
         }
 
         # ===== Reading parameter
@@ -51,7 +51,7 @@ copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname
                         # Upload the file with a httr::PUT request
                         responseWrite <- httr::PUT(uriWrite, body = upload_file(paste0(from_folder, fname) ))
 
-                        warn_for_status(responseWrite)
+                        httr::warn_for_status(responseWrite)
 
                         # removes the temporary file
                         if(tryCatch( base::file.remove(paste0(from_folder, fname) ), silent=T, message=NULL)){}
@@ -72,17 +72,19 @@ copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname
                 # Save
                 uriToWrite <- paste0(hdfsUri, destUri, newname, writeParameter, optionnalParametersWrite)
                 response <- httr::PUT(uriToWrite)
+
                 # Get the url of the datanode returned by hdfs
                 uriWrite <- response$url
+
                 # Upload the file with a httr::PUT request
                 cat("Uploading : ", paste0(from_folder, fname), "\n")
                 responseWrite <- httr::PUT(uriWrite, body = httr::upload_file( paste0(from_folder, fname) ))
 
-                warn_for_status(responseWrite)
+                httr::warn_for_status(responseWrite)
 
                 # Handling error
                 if(responseWrite$status_code >= 400){
-                        warning(paste("Copy error to hdfs :", responseWrite$status_code)) # *** commit08-04-19 stop <> warning
+                        warning(paste("Copy error to hdfs :", responseWrite$status_code))
                              }
 
                 # removes the temporary file

@@ -9,8 +9,7 @@
 #'
 #' @return nada , delete one file or all files in hdfs directory
 #' @export
-#' @import httr
-#' @import dplyr
+#' @importFrom httr DELETE warn_for_status
 
 delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""){
 
@@ -32,9 +31,9 @@ delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""
                         for (fname in fnames){
                                 # Delete
                                 uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
-                                response <- DELETE(uriToDelete)
+                                response <- httr::DELETE(uriToDelete)
 
-                                warn_for_status(response)
+                                httr::warn_for_status(response)
 
                                 cat("The following file has been deleted :\n", fname, "\n")
                         }
@@ -42,9 +41,9 @@ delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""
                 else{
                         # Delete
                         uriToDelete <- paste0(hdfsUri, dirUri, fname, deleteParameter, optionnalParametersWrite)
-                        response <- DELETE(uriToDelete)
+                        response <- httr::DELETE(uriToDelete)
 
-                        warn_for_status(response)
+                        httr::warn_for_status(response)
 
                         cat("The following file has been deleted :\n", fname, "\n")
                 }

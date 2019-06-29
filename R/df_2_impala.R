@@ -2,7 +2,7 @@
 #' df_2_impala
 #'
 #' @param hdfs_uri , url of platform
-#' @param dir_path , directory of interest
+#' @param dirUri , directory of interest
 #' @param db_name , database name
 #' @param tab_name , name of the table to be created
 #' @param id , identification credential
@@ -13,16 +13,15 @@
 #'
 #' @return nada , allows impala/hive table creation from 1 folder with csv(s) to Impala (creation, append)
 #' @export
-#' @import httr
+#' @importFrom httr PUT
 #' @importFrom data.table fread
-#' @import DBI
-#' @import odbc
+#' @importFrom DBI dbGetQuery dbDisconnect dbSendQuery dbClearResult dbQuoteIdentifier
 #' @importFrom tools file_path_sans_ext
 
-df_2_impala <- function(hdfs_uri, dir_path, db_name, tab_name, id, pw, host, port, delim = ",") {
+df_2_impala <- function(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, delim = ",") {
 
 
-        conn <- connect_init(id = id, pw = pw, host = host, port = port)
+        conn <- connect_init(id = id, pw = pw, host = host, port = port) # ptools::connect_init
 
         res <- DBI::dbGetQuery(conn, paste0("SHOW TABLES in ", db_name," LIKE '", tab_name, "'"))
         res <- nrow(res) > 0
@@ -34,31 +33,31 @@ df_2_impala <- function(hdfs_uri, dir_path, db_name, tab_name, id, pw, host, por
         }else{
 
                 # Go inside directory and list csv files
-                flist_name <- list_files(hdfsUri = hdfs_uri, dirUri = dir_path)
-                name_cible <- flist_name[1]
+                flist_name <- list_files(hdfsUri = hdfs_uri, dirUri = dirUri)
+                file_name <- flist_name[1]
 
                 # fetch file
-                resultat_cible <- data.table::fread(paste0(hdfs_uri, dir_path, "/", name_cible, "?op=OPEN"))
+                data_raw <- data.table::fread(paste0(hdfs_uri, dirUri, "/", file_name, "?op=OPEN"))
 
                 # take first file to get structure
-                name_cible <- tools::file_path_sans_ext(name_cible)
+                data_names <- tools::file_path_sans_ext(data_names)
 
                 # ===== Create Impala table
-                classes <- sapply(resultat_cible, class) # Classes de l'objet en R
+                classes <- sapply(data_raw, class) # Classes de l'objet en R
                 classes_impala <- c(character = 'STRING', numeric = 'DOUBLE', integer = 'INTEGER', logical="BOOLEAN")
                 classes_to_write <- classes_impala[classes] # Mapping Impala classes to R object
 
                 cat("Classes detected :", unique(classes_to_write), "\n")
 
                 # Adding quote ids in case of key word used
-                df_names <- dbQuoteIdentifier(conn, names(resultat_cible)) # Ajout des quotes `` aux noms des colonnes
+                df_names <- dbQuoteIdentifier(conn, names(data_raw)) # Ajout des quotes `` aux noms des colonnes
                 variables_types <- paste(df_names, classes_to_write, collapse = ', ') # Partie de la requête pour les noms et types
 
                 instruction <- "CREATE EXTERNAL TABLE IF NOT EXISTS " ;
 
                 row_format <- paste0(" row format delimited fields terminated by '", delim, "' ") ;
                 source_format <- "stored as textfile location " ; #
-                source_location <- dir_path # paste0("/", fileUri) ;
+                source_location <- dirUri # paste0("/", fileUri) ;
                 tblproperties <- " tblproperties('skip.header.line.count'='1') ; "
 
                 # ===== Writtin' complete query
@@ -79,7 +78,7 @@ df_2_impala <- function(hdfs_uri, dir_path, db_name, tab_name, id, pw, host, por
 
         } # else
 
-        cat("End creation/append table", dir_path, "\n")
+        cat("End creation of table", dirUri, "\n")
 
         DBI::dbDisconnect(conn)
 
