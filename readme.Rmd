@@ -1,10 +1,9 @@
 ---
-title: "ptools"
 output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -19,78 +18,60 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
-```{r, echo=FALSE, out.width="200px"}
-knitr::include_graphics("man/ptools.png")
-```
 
 
-```{r, echo=FALSE, out.width="250px"}
-# knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/thinkr/master/inst/img/thinkr-hex-thinkr-package.png")
-```
+# ptools <a href='https://www.next-decision.fr/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
-```{r echo=FALSE, prompt=FALSE, results='asis', comment=""}
+<!-- badges: start -->
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
 
-# install.packages("usethis", lib = "lib_local")
-# install.packages("clisymbols", lib = "lib_local")
-# library(usethis, lib.loc = "lib_local")
-# library(clisymbols, lib.loc = "lib_local")
-# usethis::use_lifecycle_badge("Experimental")
 
-# cat('
-#   [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
-# ')
-
-cat("[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)"
-)
-
-```
-
-to come : hex logo using GuangchuangYu/hexSticker pkg
 
 ## Overview
 
-dftools is a package to help you organize your data pipeline project. Since setting up a project follows always the same step, a default procedure is suggested here to save time. The purpose is also to ease project upgrades and allow unit testing.
+`ptools` is a package to help you organize your data pipeline project. Since setting up a project follows recurrent step, a default procedure is suggested here to save time. The purpose is also to ease project upgrades and allow unit testing.
 
 Reporting on the project construction is also important, tools to achive this will be developped in the future.
 
 ## Installation
 
+This package will be not be deployed to CRAN, you need to install it from github.
+
 ```{r, eval = FALSE}
 # To install from github you need the package devtools first
-if(!require("devtools")){install.packages("devtools")}
+if(!require("devtools", character.only = TRUE)){install.packages("devtools")}
 
-# Then you may intall dftools
-devtools::install_github("goodfr/dftools")
+# Then you may intall ptools
+devtools::install_github("ND-open/ptools")
 ```
 
 
 ## Default scheme
 
-To that end the following organization is used by default.
+Assuming you have imported your data on the HDFS, we suggest you store those data in `landing/my_project_name/`. Then you should create the folders `raw/my_project_name/`, `intermediate/my_project_name/` and `final/my_project_name/`.
 
-```{r}
-# something awesome should come here.
+```{r, eval = FALSE}
+# Assuming organisation
+hdfs
+|- landing
+|- raw
+|- intermediate
+|- final
 ```
 
-
-## Setting up a new scheme
-
-```{r}
-# Future step of developpement.
-```
+`ptools` functions provide tools to easily perform operations on the files while you refine the data from raw to final to finally aggregate them in Hive or Impala. See the vignette at `vignettes/ptools` for exemple of use.
 
 
-## Report on the work you have done
+## What should comes next to complete this package
 
-Explain how the project was built :
-
-* how the data was gathered
-* data transformation and stats on cleanness / missingness
-* joins performed
-
-Follow up :
-
-* How to set up daily report on the action performed and their quality.
+* A way to automatically document and report on the work you have done :
+  + how the data was gathered
+  + data transformation and stats on cleanness / missingness
+  + joins performed
+  
+* Tools to audit your pipelines :
+  + How to set up daily report on the action performed and their quality.
 
 
 
