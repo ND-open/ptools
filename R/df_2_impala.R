@@ -1,7 +1,7 @@
 
 #' df_2_impala
 #'
-#' @param hdfs_uri , url of platform
+#' @param hdfsUri , url of platform
 #' @param dirUri , directory of interest
 #' @param db_name , database name
 #' @param tab_name , name of the table to be created
@@ -33,11 +33,11 @@ df_2_impala <- function(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, 
         }else{
 
                 # Go inside directory and list csv files
-                flist_name <- list_files(hdfsUri = hdfs_uri, dirUri = dirUri)
+                flist_name <- list_files(hdfsUri = hdfsUri, dirUri = dirUri)
                 file_name <- flist_name[1]
 
                 # fetch file
-                data_raw <- data.table::fread(paste0(hdfs_uri, dirUri, "/", file_name, "?op=OPEN"))
+                data_raw <- data.table::fread(paste0(hdfsUri, dirUri, "/", file_name, "?op=OPEN"))
 
                 # take first file to get structure
                 data_names <- tools::file_path_sans_ext(data_names)

@@ -3,33 +3,37 @@ context("test-move_files")
 
 test_that("move_files", {
 
-        testthat::skip_if(.Platform$OS.type == "windows")
+        cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
+        testthat::skip_if( cond == FALSE )
 
-        hdfsUri <- Sys.getenv("webhdfs_ptools")
-        user_name <- Sys.getenv("id_ptools")
-        dirUri <-  paste0(Sys.getenv("hdfs_landing_ptools"), "origin")
-        destUri <- paste0(Sys.getenv("hdfs_landing_ptools"), "dest")
-        fname <- "test_ptools.csv"
+        if(cond == TRUE){
 
-        # --- testing 1 file movement
+                hdfsUri <- Sys.getenv("webhdfs_ptools")
+                user_name <- Sys.getenv("id_ptools")
+                dirUri <-  paste0(Sys.getenv("hdfs_landing_ptools"), "origin")
+                destUri <- paste0(Sys.getenv("hdfs_landing_ptools"), "dest")
+                fname <- "test_ptools.csv"
 
-        move_files(hdfsUri, dirUri, destUri, user_name, move_all=FALSE, fname=fname, newname="")
-        lfiles <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
-        testthat::expect_true(lfiles == fname)
+                # --- testing 1 file movement
 
-        # --- testing all files movements
-        # Forward
+                move_files(hdfsUri, dirUri, destUri, user_name, move_all=FALSE, fname=fname, newname="")
+                lfiles <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
+                testthat::expect_true(lfiles == fname)
 
-        lfiles_1 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = dirUri)
-        move_files(hdfsUri, dirUri, destUri, user_name, move_all=TRUE, fname="", newname="")
-        lfiles_2 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
-        testthat::expect_true(object = sum(lfiles_1[-1] == lfiles_2) == length(lfiles_1)) # [-1] to account for first movement
+                # --- testing all files movements
+                # Forward
 
-        # Backward
+                lfiles_1 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = dirUri)
+                move_files(hdfsUri, dirUri, destUri, user_name, move_all=TRUE, fname="", newname="")
+                lfiles_2 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
+                testthat::expect_true(object = sum(lfiles_1[-1] == lfiles_2) == length(lfiles_1)) # [-1] to account for first movement
 
-        lfiles_1 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
-        move_files(hdfsUri, destUri, dirUri, user_name, move_all=TRUE, fname="", newname="")
-        lfiles_2 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
-        testthat::expect_true(object = sum(lfiles_1 == lfiles_2) == length(lfiles_1))
+                # Backward
+
+                lfiles_1 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
+                move_files(hdfsUri, destUri, dirUri, user_name, move_all=TRUE, fname="", newname="")
+                lfiles_2 <- ptools::list_files(hdfsUri = hdfsUri, dirUri = destUri)
+                testthat::expect_true(object = sum(lfiles_1 == lfiles_2) == length(lfiles_1))
+        }
 
 })

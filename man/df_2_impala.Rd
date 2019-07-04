@@ -8,6 +8,8 @@ df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port,
   delim = ",")
 }
 \arguments{
+\item{hdfsUri}{, url of platform}
+
 \item{dirUri}{, directory of interest}
 
 \item{db_name}{, database name}
@@ -23,8 +25,6 @@ df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port,
 \item{port}{, hive or impala port}
 
 \item{delim}{, optionnal argument for the delimiter of the file. Default to ',' .}
-
-\item{hdfs_uri}{, url of platform}
 }
 \value{
 nada , allows impala/hive table creation from 1 folder with csv(s) to Impala (creation, append)

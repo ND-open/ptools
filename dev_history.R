@@ -19,6 +19,7 @@ usethis::use_build_ignore("dev_history.R")
 usethis::use_build_ignore("README.md")
 usethis::use_build_ignore("README.Rmd")
 usethis::use_build_ignore("data")
+usethis::use_build_ignore(".travis.yml")
 
 
 # Pcks
