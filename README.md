@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build
+status](https://travis-ci.com/ND-open/ptools.svg?branch=master)](https://travis-ci.com/ND-open/ptools)
 <!-- badges: end -->
 
 ## Overview

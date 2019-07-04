@@ -4,9 +4,6 @@ jobs:
   include:
   - r: 3.0
   - os: osx
-    after_success:
-    - Rscript -e 'devtools::install_deps(dep = T)'
-
     script:
     - R CMD build .
     - R CMD check *tar.gz
