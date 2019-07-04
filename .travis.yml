@@ -2,8 +2,10 @@ language: R
 
 jobs:
   include:
-  - r: 3.0
+  - r: 3.2
   - os: osx
+  - r: 3.5
+  - r: devel
     script:
     - R CMD build .
     - R CMD check *tar.gz

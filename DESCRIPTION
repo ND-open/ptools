@@ -10,7 +10,7 @@ Description: Collection of function to handle simple task around
     HDFS (such as SAAGIE data fabric) projects.
 License: GPL-3
 Depends: 
-    R (>= 3.0.0)
+    R (>= 3.2.0)
 Imports: 
     dplyr,
     httr,
