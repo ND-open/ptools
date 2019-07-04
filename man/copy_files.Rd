@@ -4,8 +4,8 @@
 \alias{copy_files}
 \title{copy_files}
 \usage{
-copy_files(hdfsUri, dirUri, destUri, user_name, copy_all = TRUE,
-  fname = "", from_hdfs = TRUE, from_folder = "", newname = "")
+copy_files(hdfsUri, dirUri, destUri, user_name, copy_all = TRUE, fname = "",
+  from_hdfs = TRUE, from_folder = "", newname = "")
 }
 \arguments{
 \item{hdfsUri}{, the url of the platform}

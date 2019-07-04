@@ -4,7 +4,7 @@ context("test-list_files")
 test_that("list_files", {
 
         cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
-        testthat::skip_if( cond == FALSE )
+        testthat::skip_if_not( cond == TRUE )
 
         if(cond == TRUE){
                 hdfsUri <- Sys.getenv("webhdfs_ptools")

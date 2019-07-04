@@ -4,7 +4,7 @@ test_that("connect_init", {
 
    cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
 
-   testthat::skip_if( cond == FALSE )
+   testthat::skip_if_not( cond == TRUE )
 
    if(cond == TRUE){
       conn <- ptools::connect_init(id = Sys.getenv("id_ptools"),

@@ -4,7 +4,7 @@ context("test-df_2_impala")
 test_that("df_2_impala", {
 
         cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
-        testthat::skip_if( cond == FALSE )
+        testthat::skip_if_not( cond == TRUE )
 
         if(cond == TRUE){
                 hdfsUri <- Sys.getenv("webhdfs_ptools")

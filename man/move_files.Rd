@@ -4,8 +4,8 @@
 \alias{move_files}
 \title{move_files}
 \usage{
-move_files(hdfsUri, dirUri, destUri, user_name, move_all = TRUE,
-  fname = "", newname = "")
+move_files(hdfsUri, dirUri, destUri, user_name, move_all = TRUE, fname = "",
+  newname = "")
 }
 \arguments{
 \item{hdfsUri, }{hdfs url}
