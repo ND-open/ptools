@@ -1,7 +1,5 @@
 ---
-title: "ptools vignette"
-author: "Camille Bonamy"
-date: "`r Sys.Date()`"
+title: "Introduction to ptools"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -14,10 +12,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+# vignette("dplyr")
 ```
 
 
-This packages provides basis R and Hadoop wrapper function to handle file movement in pipelines.
+This packages provides basic R and Hadoop wrapper function to handle file movement in pipelines.
 
 This vignette will provide one example of specific implementation. You can modify the number of steps and organisation of physic files / tabulated data to fit your expectation.
 
