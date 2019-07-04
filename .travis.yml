@@ -1,9 +1,8 @@
 language: r
-        r:
+  r:
+    install:
+      - R -e 'devtools::install_deps(dep = T)'
 
-        install:
-                - R -e 'devtools::install_deps(dep = T)'
-
-        script:
-                - R CMD build .
-                - R CMD check *tar.gz
+    script:
+      - R CMD build .
+      - R CMD check *tar.gz
