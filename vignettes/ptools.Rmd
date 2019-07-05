@@ -21,7 +21,7 @@ This packages provides basic R and Hadoop wrapper function to handle file moveme
 
 This vignette will provide one example of specific implementation. You can modify the number of steps and organisation of physic files / tabulated data to fit your expectation.
 
-### Organisation
+## Organisation
 
 The flat files (e.g csv) is processed from landing -> data/raw -> data/intermediate -> data/final. Those folder will be used here :
 
@@ -30,19 +30,28 @@ The flat files (e.g csv) is processed from landing -> data/raw -> data/intermedi
 * data/intermediate : to clean the data
 * data/final : to clean even more ?
 
-Let data_0.json be an incoming file to your hdfs. 
+Let `full_trains` be an incoming dataset in landing about french SNCF trains delay :  
 
-```{r}
-library(readr)
-full_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/full_trains.csv")
-small_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/small_trains.csv") 
+```{r, echo = FALSE}
+# full_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/full_trains.csv")
+# small_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/small_trains.csv") 
 
+# full_trains # dim 5k * 27 
+# small_trains # dim 32k * 13
+
+# saveRDS(full_trains, "full_trains.rds") # saved with vignette
+full_trains <- readRDS("full_trains.rds")
+full_trains
 ```
 
-Then using
+This file is in `.rds` format, a R specific compression format. It could have been `.json`, `csv`, `tsv`... I should decide to use only one format in the following pipeline : here I will convert all files to csv and write them to raw.
 
+```{r, echo = TRUE}
+hdfs_Uri <- Sys.getenv()
 
-you convert them to csv file and move to data/raw.
+readr::read_csv()
+```
+
 
 Then you can do some cleaning / type conversion and store thme to intermediate :
 
@@ -52,7 +61,7 @@ Then you create (or recreate here) tables :
 
 And you can perform joins.
 
-Do you analysis
+Do your analysis
 
 Clean even more, ML :
 
