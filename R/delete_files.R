@@ -18,7 +18,7 @@ delete_files <- function(hdfsUri, dirUri, user_name, delete_all = TRUE, fname=""
         if (length(fnames) == 0){warning("There is no new file to process")}
         else{
                 # ===== Delete parameter
-                username <- ifelse(is.null(user_name), "", paste0("&user.name=", user_name) )
+                user_name <- ifelse(is.null(user_name), "", paste0("&user.name=", user_name) )
                 optionnalParametersWrite <- paste0("&overwrite=true", user_name)
 
                 if(user_name == ""){warning("user_name empty, this may cause problems.")}

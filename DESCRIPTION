@@ -20,7 +20,8 @@ Imports:
     data.table,
     DBI,
     odbc,
-    tibble
+    tibble,
+    stringr
 Suggests: 
     testthat,
     knitr,

@@ -3,22 +3,22 @@ context("test-df_2_impala")
 
 test_that("df_2_impala", {
 
-        cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
+        cond <- Sys.getenv("dotest_ptools")
         testthat::skip_if_not( cond == TRUE )
 
         if(cond == TRUE){
                 hdfsUri <- Sys.getenv("webhdfs_ptools")
-                dirUri <-  paste0(Sys.getenv("hdfs_landing_ptools"), "origin")
+                dirUri <-  paste0(Sys.getenv("hdfs_landing_ptools"), "origin/")
                 db_name <- Sys.getenv("db_ptools")
-                tab_name <- Sys.getenv("id_ptools")
+                tab_name <- Sys.getenv("tab_ptools")
                 id <- Sys.getenv("id_ptools")
                 pw <- Sys.getenv("pw_ptools")
                 host <- Sys.getenv("host_ptools")
                 port <- Sys.getenv("port_ptools")
                 delim = "," # assuming default csv
-                df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, delim = ",")
+                ptools::df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, delim = ",")
 
-                if(test_cond == TRUE){
+                if(cond == TRUE){
                         conn <- ptools::connect_init(id, pw, host, port)
                         ltable <- DBI::dbGetQuery(conn, paste0("SHOW TABLES in ", db_name, " LIKE '", tab_name, "'") )
                 }

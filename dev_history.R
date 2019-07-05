@@ -31,12 +31,11 @@ usethis::use_package("utils")
 usethis::use_package("data.table")
 usethis::use_package("DBI")
 usethis::use_package("odbc")
+usethis::use_package("stringr")
 
 # devtools::build_vignettes(
 usethis::use_vignette("ptools")
 
 
 # TEST AFTER PUSH ON GITHUB REPOS
-# remove.packages("dftools")
-
-# devtools::install_github("goodfr/dftools")
+# remove.packages("ptools")

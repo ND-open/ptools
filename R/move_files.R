@@ -16,7 +16,7 @@
 move_files <- function(hdfsUri, dirUri, destUri, user_name, move_all=TRUE, fname="", newname=""){
 
         if(move_all == TRUE){
-                source("R/file_manip/list_files.R")
+
                 fname_list <- list_files(hdfsUri, dirUri)
 
                 cat("Moving the files from", dirUri, "to", destUri, ": \n")
@@ -34,9 +34,6 @@ move_files <- function(hdfsUri, dirUri, destUri, user_name, move_all=TRUE, fname
         destination <- paste0("&destination=", destUri)
 
         for(fname_1 in fname_list){
-
-                # -- for test
-                # fname_1 <- fname_list[2]
 
                 # --- create new dir
                 uriToWrite <- paste0(hdfsUri, destUri, "?op=MKDIRS&permission=755", user)

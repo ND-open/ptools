@@ -30,7 +30,16 @@ The flat files (e.g csv) is processed from landing -> data/raw -> data/intermedi
 * data/intermediate : to clean the data
 * data/final : to clean even more ?
 
-Let data_0.json be an incoming file to your hdfs. Then using
+Let data_0.json be an incoming file to your hdfs. 
+
+```{r}
+library(readr)
+full_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/full_trains.csv")
+small_trains <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/small_trains.csv") 
+
+```
+
+Then using
 
 
 you convert them to csv file and move to data/raw.

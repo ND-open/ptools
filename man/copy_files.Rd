@@ -5,29 +5,31 @@
 \title{copy_files}
 \usage{
 copy_files(hdfsUri, dirUri, destUri, user_name, copy_all = TRUE, fname = "",
-  from_hdfs = TRUE, from_folder = "", newname = "")
+  from_hdfs = TRUE, from_folder = "", newname = "", rm_temp_file = TRUE)
 }
 \arguments{
-\item{hdfsUri}{, the url of the platform}
+\item{hdfsUri, }{the url of the platform}
 
-\item{dirUri}{, the path to the folder of origin}
+\item{dirUri, }{the path to the folder of origin}
 
-\item{destUri}{, the path to the folder of destination}
+\item{destUri, }{the path to the folder of destination}
 
-\item{user_name}{, credential with writing credential}
+\item{user_name, }{credential with writing credential}
 
-\item{copy_all}{, optionnal argument : shall all the files in origin folder be copied ?}
+\item{copy_all, }{optionnal argument : shall all the files in origin folder be copied ?}
 
-\item{fname}{, optionnal argument : name of the unique file to copy}
+\item{fname, }{optionnal argument : name of the unique file to copy}
 
-\item{from_hdfs}{, optionnal argument : is the file stored locally in R session ?}
+\item{from_hdfs, }{optionnal argument : is the file stored locally in R session ?}
 
-\item{from_folder}{, optionnal argument : boolean, is the file to move stored in a local folder ?}
+\item{from_folder, }{optionnal argument to upload file from local directory (with `/` at the end)}
 
-\item{newname}{, optionnal default to "", usefull when copy from HDFS : allow copied file renaming}
+\item{newname, }{optionnal default to "", usefull when copy from HDFS : allow copied file renaming}
+
+\item{rm_temp_file, }{default to TRUE to remove local copy of the file}
 }
 \value{
-nada , the file is copied to wanted directory
+nada, the file is copied either from HDFS (by default) or from R session to the wanted HDFS directory.
 }
 \description{
 copy_files

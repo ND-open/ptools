@@ -37,10 +37,7 @@ df_2_impala <- function(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, 
                 file_name <- flist_name[1]
 
                 # fetch file
-                data_raw <- data.table::fread(paste0(hdfsUri, dirUri, "/", file_name, "?op=OPEN"))
-
-                # take first file to get structure
-                data_names <- tools::file_path_sans_ext(data_names)
+                data_raw <- data.table::fread(paste0(hdfsUri, dirUri, file_name, "?op=OPEN"))
 
                 # ===== Create Impala table
                 classes <- sapply(data_raw, class) # Classes de l'objet en R
@@ -48,6 +45,10 @@ df_2_impala <- function(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port, 
                 classes_to_write <- classes_impala[classes] # Mapping Impala classes to R object
 
                 cat("Classes detected :", unique(classes_to_write), "\n")
+
+                # cleaning the names for compatibility
+                names(data_raw) <- stringr::str_replace_all(string = names(data_raw), pattern = "\\.", replacement = "_")
+                # names(data_raw) <- stringr::str_remove_all(string = names(data_raw), pattern = [[:punct:]])
 
                 # Adding quote ids in case of key word used
                 df_names <- dbQuoteIdentifier(conn, names(data_raw)) # Ajout des quotes `` aux noms des colonnes

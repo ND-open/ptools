@@ -1,27 +1,29 @@
 
 #' copy_files
 #'
-#' @param hdfsUri , the url of the platform
-#' @param dirUri , the path to the folder of origin
-#' @param destUri , the path to the folder of destination
-#' @param user_name , credential with writing credential
-#' @param copy_all , optionnal argument : shall all the files in origin folder be copied ?
-#' @param fname , optionnal argument : name of the unique file to copy
-#' @param from_hdfs , optionnal argument : is the file stored locally in R session ?
-#' @param from_folder , optionnal argument : boolean, is the file to move stored in a local folder ?
-#' @param newname , optionnal default to "", usefull when copy from HDFS : allow copied file renaming
+#' @param hdfsUri, the url of the platform
+#' @param dirUri, the path to the folder of origin
+#' @param destUri, the path to the folder of destination
+#' @param user_name, credential with writing credential
+#' @param copy_all, optionnal argument : shall all the files in origin folder be copied ?
+#' @param fname, optionnal argument : name of the unique file to copy
+#' @param from_hdfs, optionnal argument : is the file stored locally in R session ?
+#' @param from_folder, optionnal argument to upload file from local directory (with `/` at the end)
+#' @param newname, optionnal default to "", usefull when copy from HDFS : allow copied file renaming
+#' @param rm_temp_file, default to TRUE to remove local copy of the file
 #'
-#' @return nada , the file is copied to wanted directory
+#' @return nada, the file is copied either from HDFS (by default) or from R session to the wanted HDFS directory.
 #' @export
 #' @importFrom httr PUT warn_for_status upload_file
 #' @importFrom utils download.file
 
-copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname="", from_hdfs=TRUE, from_folder="", newname=""){
+copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname="", from_hdfs=TRUE, from_folder="", newname="", rm_temp_file = TRUE){
 
         # ===== Getting file names to move
         if(from_hdfs == TRUE){
-
                 fnames <- list_files(hdfsUri, dirUri) # (ptools::list_files)
+        }else{
+                fnames <- list.files(from_folder)
         }
 
         # ===== Reading parameter
@@ -85,11 +87,13 @@ copy_files <- function(hdfsUri, dirUri, destUri, user_name, copy_all=TRUE, fname
                 # Handling error
                 if(responseWrite$status_code >= 400){
                         warning(paste("Copy error to hdfs :", responseWrite$status_code))
-                             }
+                }
 
                 # removes the temporary file
-                if( tryCatch( base::file.remove(paste0(from_folder, fname) ), silent=T, message=NULL)){}
-                cat("The following file has been moved :\n", paste0(from_folder, fname), "\n \n")
+                if(rm_temp_file == TRUE){
+                        if( tryCatch( base::file.remove(paste0(from_folder, fname) ), silent=T, message=NULL)){}
+                        cat("The following file has been moved :\n", paste0(from_folder, fname), "\n \n")
+                }
 
         } # else
 

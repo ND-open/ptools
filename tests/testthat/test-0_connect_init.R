@@ -2,7 +2,7 @@ context("test-connect_init")
 
 test_that("connect_init", {
 
-   cond <- grepl("saagie", Sys.getenv("RSTUDIO_HTTP_REFERER"))
+   cond <- Sys.getenv("dotest_ptools")
 
    testthat::skip_if_not( cond == TRUE )
 
