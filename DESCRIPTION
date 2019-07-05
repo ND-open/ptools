@@ -21,7 +21,8 @@ Imports:
     DBI,
     odbc,
     tibble,
-    stringr
+    stringr,
+    readr
 Suggests: 
     testthat,
     knitr,

@@ -32,6 +32,7 @@ usethis::use_package("data.table")
 usethis::use_package("DBI")
 usethis::use_package("odbc")
 usethis::use_package("stringr")
+usethis::use_package("readr")
 
 # devtools::build_vignettes(
 usethis::use_vignette("ptools")
