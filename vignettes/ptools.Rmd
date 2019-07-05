@@ -23,7 +23,7 @@ This vignette will provide one example of specific implementation. You can modif
 
 ## Organisation
 
-The flat files (e.g csv) is processed from landing -> data/raw -> data/intermediate -> data/final. Those folder will be used here :
+The flat files (e.g csv) is processed in order from landing, data/raw, data/intermediate and data/final. Those folder will be used here :
 
 * landing : to store and archive incoming data
 * data/raw : to perform file type conversion if needed
@@ -41,15 +41,16 @@ Let `full_trains` be an incoming dataset in landing about french SNCF trains del
 
 # saveRDS(full_trains, "full_trains.rds") # saved with vignette
 full_trains <- readRDS("full_trains.rds")
-full_trains
+# str(full_trains)
+knitr::kable(head(full_trains[, 1:6], 10))
 ```
 
 This file is in `.rds` format, a R specific compression format. It could have been `.json`, `csv`, `tsv`... I should decide to use only one format in the following pipeline : here I will convert all files to csv and write them to raw.
 
 ```{r, echo = TRUE}
-hdfs_Uri <- Sys.getenv()
+# hdfs_Uri <- Sys.getenv()
 
-readr::read_csv()
+# readr::read_csv()
 ```
 
 
