@@ -20,7 +20,7 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 
 
 
-# ptools <a href='https://www.next-decision.fr/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# ptools <a href='https://www.next-decision.fr/'><img src='man/figures/ptools_logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -50,15 +50,16 @@ devtools::install_github("ND-open/ptools")
 
 ## Default scheme
 
-Assuming you have imported your data on the HDFS, we suggest you store those data in `landing/my_project_name/`. Then you should create the folders `raw/my_project_name/`, `intermediate/my_project_name/` and `final/my_project_name/`.
+Assuming you have imported your data on the HDFS, we suggest you store those data in `landing/my_project_name`. Then you should create the folders `data/raw/my_project_name`, `data/intermediate/my_project_name` and `data/final/my_project_name`.
 
 ```{r, eval = FALSE}
 # Assuming organisation
 hdfs
 |- landing
-|- raw
-|- intermediate
-|- final
+|- data
+    |- raw
+    |- intermediate
+    |- final
 ```
 
 `ptools` functions provide tools to easily perform operations on the files while you refine the data from raw to final to finally aggregate them in Hive or Impala. See the vignette at `vignettes/ptools` for exemple of use.

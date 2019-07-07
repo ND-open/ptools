@@ -1,5 +1,5 @@
 
-#' copy_files
+#' Copy flat files from HDFS folder or local R project folder to HDFS folder.
 #'
 #' @param hdfsUri, the url of the platform
 #' @param dirUri, the path to the folder of origin

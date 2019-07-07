@@ -1,5 +1,5 @@
 
-#' connect_init
+#' Initialise connector to Impala or Hive.
 #'
 #' @param id , identifiaction credential for connexion
 #' @param pw , password credential for connexion

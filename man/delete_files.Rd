@@ -2,7 +2,7 @@
 % Please edit documentation in R/delete_files.R
 \name{delete_files}
 \alias{delete_files}
-\title{delete_files}
+\title{Delete files on HDFS.}
 \usage{
 delete_files(hdfsUri, dirUri, user_name, delete_all = TRUE, fname = "")
 }
@@ -21,5 +21,5 @@ delete_files(hdfsUri, dirUri, user_name, delete_all = TRUE, fname = "")
 nada , delete one file or all files in hdfs directory
 }
 \description{
-delete_files
+Delete files on HDFS.
 }

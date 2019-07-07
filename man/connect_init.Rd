@@ -2,7 +2,7 @@
 % Please edit documentation in R/connect_init.R
 \name{connect_init}
 \alias{connect_init}
-\title{connect_init}
+\title{Initialise connector to Impala or Hive.}
 \usage{
 connect_init(id, pw, host, port)
 }
@@ -19,5 +19,5 @@ connect_init(id, pw, host, port)
 a connection to impala, the driver (depending on OS) is automatically detected.
 }
 \description{
-connect_init
+Initialise connector to Impala or Hive.
 }

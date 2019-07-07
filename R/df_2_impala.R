@@ -1,5 +1,5 @@
 
-#' df_2_impala
+#' Create or append Impala/Hive tables from HDFS folder (all files must have the same structure).
 #'
 #' @param hdfsUri , url of platform
 #' @param dirUri , directory of interest

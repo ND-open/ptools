@@ -2,7 +2,7 @@
 % Please edit documentation in R/copy_files.R
 \name{copy_files}
 \alias{copy_files}
-\title{copy_files}
+\title{Copy flat files from HDFS folder or local R project folder to HDFS folder.}
 \usage{
 copy_files(hdfsUri, dirUri, destUri, user_name, copy_all = TRUE,
   fname = "", from_hdfs = TRUE, from_folder = "", newname = "",
@@ -33,5 +33,5 @@ copy_files(hdfsUri, dirUri, destUri, user_name, copy_all = TRUE,
 nada, the file is copied either from HDFS (by default) or from R session to the wanted HDFS directory.
 }
 \description{
-copy_files
+Copy flat files from HDFS folder or local R project folder to HDFS folder.
 }

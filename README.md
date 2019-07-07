@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ptools <a href='https://www.next-decision.fr/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# ptools <a href='https://www.next-decision.fr/'><img src='man/figures/ptools_logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -17,8 +17,8 @@ Since setting up a project follows recurrent step, a default procedure
 is suggested here to save time. The purpose is also to ease project
 upgrades and allow unit testing.
 
-Reporting on the project construction is also important, tools to achive
-this will be developped in the future.
+Reporting on the project construction is also important, tools to
+achieve this will be developped in the future.
 
 ## Installation
 

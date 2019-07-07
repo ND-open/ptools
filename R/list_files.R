@@ -1,5 +1,5 @@
 
-#' list_files
+#' List files from HDFS folder.
 #'
 #' @param hdfsUri , hdfs url
 #' @param dirUri , path to folder

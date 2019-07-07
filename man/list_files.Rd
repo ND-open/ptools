@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_files.R
 \name{list_files}
 \alias{list_files}
-\title{list_files}
+\title{List files from HDFS folder.}
 \usage{
 list_files(hdfsUri, dirUri)
 }
@@ -15,5 +15,5 @@ list_files(hdfsUri, dirUri)
 a character vector of files in directory
 }
 \description{
-list_files
+List files from HDFS folder.
 }

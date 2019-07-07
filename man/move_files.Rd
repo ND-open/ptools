@@ -2,7 +2,7 @@
 % Please edit documentation in R/move_files.R
 \name{move_files}
 \alias{move_files}
-\title{move_files}
+\title{Move files from HDFS folders.}
 \usage{
 move_files(hdfsUri, dirUri, destUri, user_name, move_all = TRUE,
   fname = "", newname = "")
@@ -26,5 +26,5 @@ move_files(hdfsUri, dirUri, destUri, user_name, move_all = TRUE,
 nothing, see more HDFS API at ttps://hadoop.apache.org/docs/r1.0.4/webhdfs.html
 }
 \description{
-move_files
+Move files from HDFS folders.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/df_2_impala.R
 \name{df_2_impala}
 \alias{df_2_impala}
-\title{df_2_impala}
+\title{Create or append Impala/Hive tables from HDFS folder (all files must have the same structure).}
 \usage{
 df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port,
   delim = ",")
@@ -30,5 +30,5 @@ df_2_impala(hdfsUri, dirUri, db_name, tab_name, id, pw, host, port,
 nada , allows impala/hive table creation from 1 folder with csv(s) to Impala (creation, append)
 }
 \description{
-df_2_impala
+Create or append Impala/Hive tables from HDFS folder (all files must have the same structure).
 }

@@ -20,6 +20,7 @@ usethis::use_build_ignore("README.md")
 usethis::use_build_ignore("README.Rmd")
 usethis::use_build_ignore("data")
 usethis::use_build_ignore(".travis.yml")
+usethis::use_build_ignore("docs")
 
 
 # Pcks
@@ -37,6 +38,8 @@ usethis::use_package("readr")
 # devtools::build_vignettes(
 usethis::use_vignette("ptools")
 
+# pkgdown
+pkgdown::build_site()
 
 # TEST AFTER PUSH ON GITHUB REPOS
 # remove.packages("ptools")

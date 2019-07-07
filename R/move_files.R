@@ -1,5 +1,5 @@
 
-#' move_files
+#' Move files from HDFS folders.
 #'
 #' @param hdfsUri, hdfs url
 #' @param dirUri, path to directory to move file from

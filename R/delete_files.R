@@ -1,5 +1,5 @@
 
-#' delete_files
+#' Delete files on HDFS.
 #'
 #' @param hdfsUri , hdfs url
 #' @param dirUri , path to directory of interest
