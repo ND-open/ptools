@@ -36,17 +36,18 @@ devtools::install_github("ND-open/ptools")
 ## Default scheme
 
 Assuming you have imported your data on the HDFS, we suggest you store
-those data in `landing/my_project_name/`. Then you should create the
-folders `raw/my_project_name/`, `intermediate/my_project_name/` and
-`final/my_project_name/`.
+those data in `landing/my_project_name`. Then you should create the
+folders `data/raw/my_project_name`, `data/intermediate/my_project_name`
+and `data/final/my_project_name`.
 
 ``` r
 # Assuming organisation
 hdfs
 |- landing
-|- raw
-|- intermediate
-|- final
+|- data
+    |- raw
+    |- intermediate
+    |- final
 ```
 
 `ptools` functions provide tools to easily perform operations on the
