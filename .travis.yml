@@ -1,6 +1,9 @@
 language: R
 cache: packages
 
+before_cache:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
+
 jobs:
   include:
   - r: 3.2
@@ -10,3 +13,8 @@ jobs:
     script:
     - R CMD build .
     - R CMD check *tar.gz
+
+deploy:
+      provider: script
+      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+      skip_cleanup: true
