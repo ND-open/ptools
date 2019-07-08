@@ -73,15 +73,19 @@
 </h1></div>
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<!-- [![packageversion](https://img.shields.io/badge/package%20version-x86_64-w64-mingw32, x86_64, mingw32, x86_64, mingw32, , 3, 5.3, 2019, 03, 11, 76217, R, R version 3.5.3 (2019-03-11), Great Truth-orange.svg)](https://github.com/ND-open/ptools/master/DESCRIPTION) blob/master/ -->
+<div id="overview" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h3>
 <p><code>ptools</code> is a package to help you organize your data pipeline project. Since setting up a project follows recurrent step, a default procedure is suggested here to save time. The purpose is also to ease project upgrades and allow unit testing.</p>
-<p>Reporting on the project construction is also important, tools to achieve this will be developped in the future.</p>
+<ul>
+<li>See the <a href="https://nd-open.github.io/ptools/articles/ptools.html">Get Started</a> section for an introduction on how to use this package.</li>
+<li>Got a idea or bug to report to improve this project ? Please check the <a href="https://github.com/ND-open/ptools">github page</a> and fill an issue, PR are welcome !</li>
+</ul>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>This package will be not be deployed to CRAN, you need to install it from github.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># To install from github you need the package devtools first</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="cf">if</span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(<span class="st">"devtools"</span>, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)){<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)}</a>
@@ -89,12 +93,12 @@
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Then you may intall ptools</span></a>
 <a class="sourceLine" id="cb1-5" title="5">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ND-open/ptools"</span>)</a></code></pre></div>
 </div>
-<div id="organize-your-projects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#organize-your-projects" class="anchor"></a>Organize your projects</h2>
+<div id="organize-your-projects" class="section level3">
+<h3 class="hasAnchor">
+<a href="#organize-your-projects" class="anchor"></a>Organize your projects</h3>
 <p>The first step of one project is to define what you want to do with your data. If there are several uses to your data you may want to cut your project in pieces. Straightforward runs will allow you to get quicker wins and also to keep your teams (end user, devs,… ) motivated.</p>
 <p>By default the following structure is created to keep track of your data processing :</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Assuming organisation</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Assuming HDFS organisation</span></a>
 <a class="sourceLine" id="cb2-2" title="2">hdfs</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="op">|-</span><span class="st"> </span>landing</a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="op">|-</span><span class="st"> </span>data</a>
@@ -103,30 +107,55 @@
 <a class="sourceLine" id="cb2-7" title="7">    <span class="op">|-</span><span class="st"> </span>final</a></code></pre></div>
 <ul>
 <li>
-<code>landing</code> : only outside raw data that will processed then archived. If things goes to worst you will be able to start from scratch from there.</li>
+<code>landing</code> : contains only outside raw data that will processed then archived. If things goes to worst you will be able to start from scratch from there.</li>
 <li>
-<code>data</code> : you operations starts here, the default here is to process only csv files before building Impala or Hive tables.
+<code>data</code> : your operations starts here, the default here is to process only csv files before building Impala or Hive tables.
 <ul>
 <li>
 <code>raw</code> : for primary operations like processing the extension of your data (e.g from json to csv).</li>
 <li>
 <code>intermediate</code> : optionnal, depending on your pipeline you may want to reshape the data or add more cleaning steps.</li>
 <li>
-<code>final</code> : here will be stored the cleaned data that you want to build Impala or Hive tables uppon.</li>
+<code>final</code> : here will be stored the cleaned data that you want to build Impala or Hive tables uppon. The final clean data will be automatically converted to Impala (or Hive) tables from the final folder(s) on HDFS with the corresponding type. Then you may aggregate it using Hadoop.</li>
 </ul>
 </li>
 </ul>
-<p>There are several operations that you cannot perform easily or not at all in Impala/Hive (such as complex data transformation, reshaping, …). But you should perform joins using Hadoop to ensure that all the data is matched with what is intended no matter how delayed this data was uploaded and insure that your project is viable in time (e.g 5 years from now your R code is not optimized to join on that much data).</p>
+<p>There are several operations that you cannot perform easily or not at all in Impala/Hive (such as complex data transformation, reshaping, …). But you should perform joins using Hadoop to ensure that all the data is matched with what is intended no matter how delayed this data was uploaded and insure that your project is viable in time (e.g 5 years from now your R code might not be optimized to join on much more data).</p>
 </div>
-<div id="focus-on-cleaning-the-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#focus-on-cleaning-the-data" class="anchor"></a>Focus on cleaning the data</h2>
-<p>Thus you can only focus on cleaning your data while not messing with the <code>landing folder</code>. Your final files can be automatically converted to Impala tables with the corresponding type. Then you may aggregate them in Hive or Impala.</p>
-<p>See the <a href="https://nd-open.github.io/ptools/articles/ptools.html">Get Sarted</a> section for an example of how to use this package.</p>
+<div id="focus-on-cleaning-the-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#focus-on-cleaning-the-data" class="anchor"></a>Focus on cleaning the data</h3>
+<p>Thus you can only focus on cleaning your data while not messing with the <code>landing folder</code>. The structure of your pipeline should look like :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">project_name</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="op">|-</span><span class="st"> </span>.gitignore</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">|-</span><span class="st"> </span>data</a>
+<a class="sourceLine" id="cb3-4" title="4">   <span class="op">|-</span><span class="st"> </span>references.csv</a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">|-</span><span class="st"> </span>documents</a>
+<a class="sourceLine" id="cb3-6" title="6">   <span class="op">|-</span><span class="st"> </span>meeting_notes.md</a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">|-</span><span class="st"> </span>R</a>
+<a class="sourceLine" id="cb3-8" title="8">   <span class="op">|-</span><span class="st"> </span>raw_<span class="op">*</span>.R <span class="co"># e.g : raw_to_csv.csv</span></a>
+<a class="sourceLine" id="cb3-9" title="9">   <span class="op">|-</span><span class="st"> </span>inter_<span class="op">*</span>.R <span class="co"># e.g : inter_reshape.R </span></a>
+<a class="sourceLine" id="cb3-10" title="10">   <span class="op">|-</span><span class="st"> </span>final_<span class="op">*</span>.R <span class="co"># e.f : final_types</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="op">|-</span><span class="st"> </span>project_name.Rproj</a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="op">|-</span><span class="st"> </span>README.md</a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="op">|-</span><span class="st"> </span>README.Rmd</a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="op">|-</span><span class="st"> </span>vignette</a>
+<a class="sourceLine" id="cb3-15" title="15">   <span class="op">|-</span><span class="st"> </span>report.Rmd</a></code></pre></div>
+<ul>
+<li>In the R folder we will find one script per pipeline job. If there are more than one step the jobs should be prefixed with a number to keep track of the order. You should also add a name saying what the job does such as <code>inter_reshape.R</code> for an intermediate job than takes data from the <code>raw</code> folder, reshape it (e.g from long to wide format) and write to the <code>intermediate</code> folder.</li>
+<li>In the <code>data</code> folder one can put variables dictionnary.</li>
+<li>The <code>README.Rmd</code> file is the minimal documentation for you or a peer to retake your project later on.</li>
+</ul>
 </div>
-<div id="what-could-be-usefull-as-follow-up" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-could-be-usefull-as-follow-up" class="anchor"></a>What could be usefull as follow up</h2>
+<div id="to-package-or-not-to-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#to-package-or-not-to-package" class="anchor"></a>To package or not to package</h3>
+<p>It is your choice to build a package from this structure to ensure reproducibility and stability of your code in time. You can also source your script for each pipeline job.</p>
+<p>If you rely often on this pipeline or plan to have a stable code in time, the best thing to do is to package your code (from the structure above it is to add a <code>Description</code> file and compile + debug) and add a docker file.</p>
+</div>
+<div id="what-could-be-usefull-as-follow-up" class="section level3">
+<h3 class="hasAnchor">
+<a href="#what-could-be-usefull-as-follow-up" class="anchor"></a>What could be usefull as follow up</h3>
 <ul>
 <li>A way to test your data pipeline and not mess with the source data.</li>
 <li>A way to automatically document and report on the work you have done :
@@ -163,8 +192,10 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="license"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
 <li><a href="https://travis-ci.com/ND-open/ptools"><img src="https://travis-ci.com/ND-open/ptools.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://ND-open.github.io/ptools/"><img src="https://img.shields.io/badge/documentation-pkgdown-E91E63.svg" alt="Documentation"></a></li>
 </ul>
 </div>
 </div>

@@ -14,7 +14,8 @@ jobs:
     - R CMD build .
     - R CMD check *tar.gz
 
-deploy:
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      skip_cleanup: true
+# not working yet
+# deploy:
+#      provider: script
+#      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+#      skip_cleanup: true
